@@ -34,4 +34,25 @@ function cadastrar(req, res) {
         });
 }
 
-module.exports = { cadastrar };
+function listarComentarios(req, res) {
+    var usuario = req.session.usuario;
+
+    if (!usuario) {
+        return res.status(401).send("Faça login para continuar.");
+    }
+
+    if (usuario.perfil !== "admin") {
+        return res.status(403).send("Acesso restrito ao administrador.");
+    }
+
+    avaliacaoModel.listarComentarios()
+        .then(function (comentarios) {
+            return res.json(comentarios);
+        })
+        .catch(function (erro) {
+            console.log("Erro ao buscar comentários:", erro);
+            return res.status(500).send("Erro ao buscar comentários.");
+        });
+}
+
+module.exports = { cadastrar, listarComentarios };

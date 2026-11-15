@@ -82,11 +82,45 @@
     <script>
         var formulario = document.querySelector(".experiencia-formulario");
 
-        formulario.addEventListener("submit", function (evento) {
-            evento.preventDefault();
-            document.getElementById("status-avaliacao").textContent =
-                "O envio de avaliações ainda não está disponível.";
+        formulario.addEventListener("submit", async function (evento) {
+    evento.preventDefault();
+
+    var status = document.getElementById("status-avaliacao");
+    var dados = new FormData(formulario);
+    var nota = dados.get("nota");
+    var interesse = dados.get("interesse");
+
+    if (!nota || !interesse) {
+        status.textContent = "Escolha uma nota e responda Sim ou Não.";
+        return;
+    }
+
+    var botao = formulario.querySelector("button[type='submit']");
+    botao.disabled = true;
+    status.textContent = "Enviando avaliação...";
+
+    try {
+        var resposta = await fetch("/avaliacoes/cadastrar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                nota: Number(nota),
+                interesse: interesse,
+                comentario: dados.get("comentario")
+            })
         });
+
+        status.textContent = await resposta.text();
+
+        if (resposta.ok) {
+            formulario.reset();
+        }
+    } catch (erro) {
+        status.textContent = "Não foi possível conectar ao servidor.";
+    } finally {
+        botao.disabled = false;
+    }
+});
     </script>
 </body>
 
