@@ -34,8 +34,7 @@
         <!-- Menu de navegação -->
         <nav class="menu">
             <a href="index.html">Início</a>
-            <a href="#">Sobre</a>
-            <a href="#">Sua experiência</a>
+            <a href="index.html#sobre">Sobre</a>
         </nav>
 
         <!-- Botão de entrada -->
@@ -190,9 +189,11 @@
                         sessionStorage.ID_USUARIO = json.id;
 
                         setTimeout(function () {
-
-                            window.location = "./dashboard/cards.html";
-
+                            if(json.perfil === "admin") {
+                            window.location = "./dashboard/dashboard.html";
+                            } else {
+                            window.location = "./conte-para-nos.html";
+                          }
                         }, 1000);
 
                     });

@@ -29,7 +29,9 @@ body {
     justify-content: space-between;
 
     padding: 0 40px 0 35px;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 /* Logo */
@@ -48,7 +50,7 @@ body {
 .menu {
     display: flex;
     align-items: center;
-    gap: 120px;
+    gap: 40px;
 
     position: absolute;
     left: 50%;
@@ -64,7 +66,8 @@ body {
 
 /* Botão entrar */
 
-.botao-entrar a {
+.botao-entrar a,
+.botao-avaliacao {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,13 +86,36 @@ body {
 }
 
 
+@media (max-width: 900px) {
+    .cabecalho {
+        padding: 0 12px;
+    }
+
+    .logo img {
+        width: clamp(80px, 24vw, 200px);
+    }
+
+    .menu {
+        gap: 16px;
+    }
+
+    .menu a {
+        font-size: 16px;
+    }
+
+    .botao-entrar a {
+        width: 72px;
+        font-size: 13px;
+    }
+}
+
 /* ============================= */
 /* BANNER PRINCIPAL */
 /* ============================= */
 
 .banner {
     width: 100%;
-    height: 320px;
+    height: 420px;
 
     background-image:
         linear-gradient(
@@ -170,13 +196,11 @@ body {
 /* ============================= */
 
 .sobre {
+    scroll-margin-top: 80px;
     width: 100%;
     min-height: 600px;
 
-    background-image: url("img/fundo-sobre.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    
 
     padding: 24px 60px 60px;
 }
@@ -254,7 +278,7 @@ body {
 .card {
     width: 335px;
     height: 376px;
-
+    transition: transform 200ms ease;
     background-color: #dedee2;
 
     border-radius: 35px;
@@ -268,6 +292,10 @@ body {
     align-items: center;
 
     flex-shrink: 0;
+}
+
+.card:hover {
+  transform: translateY(-6px);
 }
 
 /* Imagens dos cards */
@@ -606,4 +634,168 @@ body {
 
 .caixa-cadastro .loading-div img {
     width: 40px;
+}
+
+
+/* ============================= */
+/* CONTE PARA NÓS */
+/* ============================= */
+html:has(.experiencia) {
+    scrollbar-heigth: none;
+}
+
+.sobre,
+.experiencia {
+    position: relative;
+    isolation: isolate;
+    background-color: #000;
+}
+
+.sobre::before,
+.experiencia::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url("./fumaça.png") center / 100% 100% no-repeat;
+    filter: invert(1) brightness(1.7);
+    transform: scaleY(-1);
+    mask-image: linear-gradient(to top, transparent 12%, #000 38%);
+}
+
+.experiencia {
+    min-height: calc(100vh - 80px);
+    padding: clamp(12px, 3vh, 24px) 16px 16px;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.experiencia-etiqueta {
+    display: inline-block;
+    padding: 4px 34px;
+    border-radius: 24px;
+    background-color: #dedee2;
+    color: #000000;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+}
+
+.experiencia h1 {
+    max-width: 540px;
+    margin: 8px auto clamp(12px, 3vh, 28px);
+    padding-bottom: 12px;
+    border-bottom: 4px solid #ffffff;
+    font: 400 clamp(36px, min(7vw, 9vh), 64px) 'Anton', sans-serif;
+    text-transform: uppercase;
+}
+
+.experiencia-formulario {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.experiencia-perguntas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 14px 40px;
+    margin-bottom: clamp(12px, 3vh, 24px);
+}
+
+.experiencia fieldset {
+    width: min(100%, 300px);
+    min-width: 0;
+    border: 0;
+}
+
+.experiencia legend {
+    width: 100%;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.experiencia-opcoes {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px;
+    border-radius: 32px;
+    background-color: #dedee2;
+    color: #000000;
+}
+
+.experiencia-opcoes label {
+    position: relative;
+    cursor: pointer;
+}
+
+.experiencia-opcoes input {
+    position: absolute;
+    opacity: 0;
+}
+
+.experiencia-opcoes label > span {
+    display: block;
+    padding: 4px 9px;
+    border-radius: 18px;
+    font-size: 24px;
+    line-height: 1.25;
+}
+
+.experiencia-opcoes input:checked + span {
+    background-color: #ffffff;
+    box-shadow: inset 0 0 0 2px currentColor;
+}
+
+.experiencia-opcoes input:focus-visible + span {
+    outline: 2px dashed #000000;
+    outline-offset: 2px;
+}
+
+.experiencia-nao {
+    color: #a01515;
+}
+
+.experiencia-sim {
+    color: #076b39;
+}
+
+.experiencia-formulario > label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: clamp(19px, 4vw, 24px);
+}
+
+.experiencia textarea {
+    display: block;
+    width: 100%;
+    min-height: 150px;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 35px;
+    background-color: #dedee2;
+    color: #000000;
+    font: inherit;
+    resize: vertical;
+}
+.experiencia-opcoes label:has(input[name="nota"]:checked) > span,
+.experiencia-opcoes label:has(~ label input[name="nota"]:checked) > span {
+    color: #ffcc00;
+    background-color: transparent;
+    box-shadow: none;
+}
+.botao-avaliacao {
+    width: auto;
+    margin: 12px auto 0;
+    padding: 0 20px;
+    border: 0;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.status-avaliacao:not(:empty) {
+    margin-top: 8px;
+    font-size: 14px;
 }

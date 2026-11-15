@@ -7,9 +7,11 @@ var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
 require("dotenv").config({ path: caminho_env });
 
+var session = require("express-session")
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
+var avaliacoesRouter = require("./src/routes/avaliacao");
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
 
@@ -22,8 +24,29 @@ var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
 var empresasRouter = require("./src/routes/empresas");
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        sameSite: "lax"
+    }
+}));
+app.use("/dashboard", function (req, res, next) {
+    var usuario = req.session.usuario;
+    if (!usuario) {
+        return res.redirect("/login.html");
+    }
+    if (usuario.perfil !== "admin") {
+        return res.status(403).send("Acesso restrito ao administrador.");
+    }
+    next();
+}, express.static(path.join(__dirname, "dashboard")));
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
@@ -34,6 +57,7 @@ app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter);
 app.use("/aquarios", aquariosRouter);
 app.use("/empresas", empresasRouter);
+app.use("/avaliacoes", avaliacoesRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
