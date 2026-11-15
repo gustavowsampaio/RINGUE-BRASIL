@@ -55,4 +55,25 @@ function listarComentarios(req, res) {
         });
 }
 
-module.exports = { cadastrar, listarComentarios };
+function buscarResumo(req, res) {
+    var usuario = req.session.usuario;
+
+    if (!usuario) {
+        return res.status(401).send("Faça login para continuar.");
+    }
+
+    if (usuario.perfil !== "admin") {
+        return res.status(403).send("Acesso restrito ao administrador.");
+    }
+
+    avaliacaoModel.buscarResumo()
+        .then(function (resultado) {
+            return res.json(resultado[0]);
+        })
+        .catch(function (erro) {
+            console.log("Erro ao buscar resumo:", erro);
+            return res.status(500).send("Erro ao buscar o resumo.");
+        });
+}
+
+module.exports = { cadastrar, listarComentarios, buscarResumo };

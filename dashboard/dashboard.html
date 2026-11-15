@@ -54,10 +54,11 @@
                 <span class="selo">Dados de exemplo</span>
               <h1 id="tituloAvaliacoes">Avaliações do site</h1>
               <div class="resumo" aria-label="Resumo das avaliações">
-                <div class="numero">Avaliações recebidas<strong>24</strong></div>
-                <div class="numero">Nota média<strong>4,1 de 5</strong></div>
-                <div class="numero">Criaram interesse em luta livre<strong>75%</strong></div>
+                <div class="numero">Avaliações recebidas<b id="totalAvaliacoes">—</b></div>
+                <div class="numero">Nota média<b id="mediaAvaliacoes">—</b></div>
+                <div class="numero">Criaram interesse em luta livre<b id="percentualInteresse">—</b></div>
               </div>
+              <p id="statusResumo" role="status"></p>
               <div class="paineis">
                 <section class="painel"><h2>Distribuição das notas</h2>
                   <div class="barras">
@@ -70,29 +71,21 @@
                 </section>
                 <section class="painel"><h2>Interesse em luta livre</h2>
                   <div class="divisao" aria-hidden="true"><span class="sim" style="width:75%"></span><span class="nao" style="width:25%"></span></div>
-                  <div class="rotulos"><span>Sim · 18 respostas</span><span>Não · 6 respostas</span></div>
+                  <div class="rotulos">
+                    <span class="sim">Sim · 18 respostas</span>
+                    <span class="nao">Não · 6 respostas</span>
+                  </div>
                 </section>
               </div>
-              <section class="comentarios"><h2>Comentários recentes</h2>
-                <article class="comentario"><div class="detalhe"><span class="estrela">★</span> 5 de 5 · Interesse: Sim</div><p>Gostei de entender como funcionam as lutas. Fiquei com vontade de assistir a uma.</p></article>
-                <article class="comentario"><div class="detalhe"><span class="estrela">★</span> 4 de 5 · Interesse: Sim</div><p>A parte sobre a história foi a minha favorita. Queria ver mais sobre luta livre no Brasil.</p></article>
-              </section>
+<section class="comentarios">
+    <h2>Comentários recentes</h2>
+    <div id="comentariosRecentes"></div>
+</section>
             </section>
             <section id="comentarios" class="conteudo" aria-labelledby="tituloComentarios" hidden>
-                      <span class="selo">Dados de exemplo</span>
                 <h1 id="tituloComentarios">Comentários</h1>
-                <article class="comentario comentario-completo">
-                    <blockquote>Gostei de entender como funcionam as lutas. Fiquei com vontade de assistir a uma.</blockquote>
-                    <div class="detalhe meta-comentario"><strong>Mariana Souza</strong><time datetime="2026-11-14T19:42:00-03:00">14/11/2026 às 19h42</time><span><span class="estrela">★</span> 5 de 5</span><span>Interesse: <strong class="sim">Sim</strong></span></div>
-                </article>
-                <article class="comentario comentario-completo">
-                    <blockquote>A parte sobre a história foi a minha favorita. Queria ver mais sobre luta livre no Brasil.</blockquote>
-                    <div class="detalhe meta-comentario"><strong>Lucas Almeida</strong><time datetime="2026-11-14T18:16:00-03:00">14/11/2026 às 18h16</time><span><span class="estrela">★</span> 4 de 5</span><span>Interesse: <strong class="sim">Sim</strong></span></div>
-                </article>
-                <article class="comentario comentario-completo">
-                    <blockquote>Entendi melhor o esporte, mas ainda não fiquei com vontade de acompanhar.</blockquote>
-                    <div class="detalhe meta-comentario"><strong>Beatriz Lima</strong><time datetime="2026-11-13T20:08:00-03:00">13/11/2026 às 20h08</time><span><span class="estrela">★</span> 3 de 5</span><span>Interesse: <strong class="nao">Não</strong></span></div>
-                </article>
+                <p id="statusComentarios" role="status"></p>
+                <div id="listaComentarios"></div>
             </section>
             <div id="alerta">
             </div>
@@ -118,6 +111,73 @@
     var abaAvaliacoes = document.getElementById("abaAvaliacoes");
     var abaComentarios = document.getElementById("abaComentarios");
 
+async function carregarComentarios() {
+    var lista = document.getElementById("listaComentarios");
+    var status = document.getElementById("statusComentarios");
+    var recentes = document.getElementById("comentariosRecentes")
+
+    status.textContent = "Carregando comentários...";
+    try {
+        var resposta = await fetch("/avaliacoes/comentarios", {
+            cache: "no-store"
+        });
+        if (!resposta.ok) {
+            status.textContent = await resposta.text();
+            return;
+        }
+        var comentarios = await resposta.json();
+        lista.replaceChildren();
+        recentes.replaceChildren();
+        if (comentarios.length === 0) {
+            status.textContent = "Nenhum comentário recebido ainda.";
+            recentes.textContent = "Nenhum comentário recebido ainda."
+            return;
+        }
+
+
+       
+
+        status.textContent = "";
+
+        comentarios.forEach(function (item, indice) {
+            var linha = document.createElement("div");
+            linha.className = "comentario comentario-completo";
+
+            var texto = document.createElement("p");
+            texto.textContent = item.comentario;
+
+            var detalhes = document.createElement("p");
+            detalhes.className = "detalhe meta-comentario";
+
+            var data = new Date(item.criado_em).toLocaleString("pt-BR");
+            detalhes.textContent = item.nome + " · " + data +
+                " · Nota: " + item.nota + " de 5";
+
+            var respostaInteresse = document.createElement("span");
+            respostaInteresse.textContent = "Interesse: ";
+
+            var valorInteresse = document.createElement("b");
+            var temInteresse = item.interesse === "sim";
+            valorInteresse.textContent = temInteresse ? "Sim" : "Não";
+            valorInteresse.className = temInteresse ? "sim" : "nao";
+
+            respostaInteresse.appendChild(valorInteresse);
+            detalhes.appendChild(respostaInteresse);
+
+            linha.appendChild(texto);
+            linha.appendChild(detalhes);
+            lista.appendChild(linha);
+
+            if(indice < 2) {
+                recentes.appendChild(linha.cloneNode(true));
+            }
+        });
+
+    } catch (erro) {
+        status.textContent = "Não foi possível carregar os comentários.";
+    }
+}
+
     function mostrarComentarios(mostrar) {
         document.getElementById("avaliacoes").hidden = mostrar;
         document.getElementById("comentarios").hidden = !mostrar;
@@ -126,7 +186,10 @@
         document.getElementById("graficos").hidden = mostrar;
         abaAvaliacoes.setAttribute("aria-pressed", !mostrar);
         abaComentarios.setAttribute("aria-pressed", mostrar);
+
+        carregarComentarios();
     }
+           
 
     abaAvaliacoes.addEventListener("click", function () {
         mostrarComentarios(false);
@@ -135,10 +198,38 @@
     abaComentarios.addEventListener("click", function () {
         mostrarComentarios(true);
     });
+async function carregarResumo() {
+    var status = document.getElementById("statusResumo");
 
-    if (window.location.hash === "#comentarios") {
-        mostrarComentarios(true);
+    try {
+        var resposta = await fetch("/avaliacoes/resumo", {
+            cache: "no-store"
+        });
+
+        if (!resposta.ok) {
+            status.textContent = await resposta.text();
+            return;
+        }
+
+        var resumo = await resposta.json();
+        var totalSim = Number(resumo.totalSim);
+        var totalInteresse = totalSim + Number(resumo.totalNao);
+
+        document.getElementById("totalAvaliacoes").textContent = resumo.total;
+        document.getElementById("mediaAvaliacoes").textContent =
+            resumo.media === null ? "—" : Number(resumo.media).toLocaleString("pt-BR") + " de 5";
+        document.getElementById("percentualInteresse").textContent =
+            totalInteresse === 0 ? "—" : Math.round(totalSim / totalInteresse * 100) + "%";
+
+        status.textContent = "";
+    } catch (erro) {
+        status.textContent = "Não foi possível carregar o resumo.";
     }
+}
+
+  mostrarComentarios(window.location.hash === "#comentarios");
+    carregarResumo();
+    
 
     let proximaAtualizacao;
 

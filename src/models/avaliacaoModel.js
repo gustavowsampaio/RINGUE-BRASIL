@@ -25,4 +25,22 @@ function listarComentarios() {
 return database.executar(instrucaoSql);
 }
 
-module.exports = { cadastrar, listarComentarios }
+function buscarResumo() {
+    var instrucaoSql = `
+        SELECT
+            COUNT(*) AS total,
+            ROUND(AVG(nota), 1) AS media,
+            COUNT(CASE WHEN nota = 1 THEN 1 END) AS nota1,
+            COUNT(CASE WHEN nota = 2 THEN 1 END) AS nota2,
+            COUNT(CASE WHEN nota = 3 THEN 1 END) AS nota3,
+            COUNT(CASE WHEN nota = 4 THEN 1 END) AS nota4,
+            COUNT(CASE WHEN nota = 5 THEN 1 END) AS nota5,
+            COUNT(CASE WHEN interesse = 'sim' THEN 1 END) AS totalSim,
+            COUNT(CASE WHEN interesse = 'nao' THEN 1 END) AS totalNao
+        FROM avaliacao;
+    `;
+
+    return database.executar(instrucaoSql);
+}
+
+module.exports = { cadastrar, listarComentarios, buscarResumo };

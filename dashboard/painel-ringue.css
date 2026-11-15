@@ -44,7 +44,7 @@
     padding: 14px 18px;
 }
 
-.painel-ringue .numero strong {
+.painel-ringue .numero b {
     display: block;
     font: 400 33px/1.15 Anton,sans-serif;
     margin-top: 6px;
@@ -252,12 +252,14 @@
     display: none;
 }
 
-.painel-ringue .meta-comentario .sim {
-    color: #7adcab;
+.painel-ringue .meta-comentario .sim,
+.painel-ringue .rotulos .sim {
+    color: #53c991;
 }
 
-.painel-ringue .meta-comentario .nao {
-    color: #ff9696;
+.painel-ringue .meta-comentario .nao,
+.painel-ringue .rotulos .nao {
+    color: #ff7575;
 }
 
 @media (max-width: 620px) {
