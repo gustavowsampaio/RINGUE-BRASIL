@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="icon" type="image/svg+xml" href="/assets/icon/bandeira-ringue-brasil.svg">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,7 +51,6 @@
 
         <div class="dash">
             <section id="avaliacoes" class="conteudo" aria-labelledby="tituloAvaliacoes">
-                <span class="selo">Dados de exemplo</span>
               <h1 id="tituloAvaliacoes">Avaliações do site</h1>
               <div class="resumo" aria-label="Resumo das avaliações">
                 <div class="numero">Avaliações recebidas<b id="totalAvaliacoes">—</b></div>
@@ -60,23 +59,26 @@
               </div>
               <p id="statusResumo" role="status"></p>
               <div class="paineis">
-                <section class="painel"><h2>Distribuição das notas</h2>
-                  <div class="barras">
-                    <div class="barra"><span>5 <span class="estrela">★</span></span><div class="trilho"><i style="width:100%"></i></div><span>12</span></div>
-                    <div class="barra"><span>4 <span class="estrela">★</span></span><div class="trilho"><i style="width:50%"></i></div><span>6</span></div>
-                    <div class="barra"><span>3 <span class="estrela">★</span></span><div class="trilho"><i style="width:25%"></i></div><span>3</span></div>
-                    <div class="barra"><span>2 <span class="estrela">★</span></span><div class="trilho"><i style="width:16.67%"></i></div><span>2</span></div>
-                    <div class="barra"><span>1 <span class="estrela">★</span></span><div class="trilho"><i style="width:8.33%"></i></div><span>1</span></div>
-                  </div>
-                </section>
-                <section class="painel"><h2>Interesse em luta livre</h2>
-                  <div class="divisao" aria-hidden="true"><span class="sim" style="width:75%"></span><span class="nao" style="width:25%"></span></div>
-                  <div class="rotulos">
-                    <span class="sim">Sim · 18 respostas</span>
-                    <span class="nao">Não · 6 respostas</span>
-                  </div>
-                </section>
-              </div>
+    <section class="painel">
+        <h2>Distribuição das notas</h2>
+        <div class="area-grafico area-grafico-notas">
+            <canvas id="graficoNotas" role="img" aria-label="Quantidade de avaliações por nota"></canvas>
+        </div>
+    </section>
+
+    <section class="painel">
+        <h2>Interesse em luta livre</h2>
+        <div class="area-grafico area-grafico-interesse">
+            <canvas id="graficoInteresse" role="img" aria-label="Respostas Sim e Não"></canvas>
+        </div>
+
+        <div class="rotulos">
+            <span id="legendaSim" class="sim"></span>
+            <span id="legendaNao" class="nao"></span>
+        </div>
+    </section>
+</div>
+
 <section class="comentarios">
     <h2>Comentários recentes</h2>
     <div id="comentariosRecentes"></div>
@@ -110,6 +112,73 @@
 
     var abaAvaliacoes = document.getElementById("abaAvaliacoes");
     var abaComentarios = document.getElementById("abaComentarios");
+    var graficoNotas;
+    var graficoInteresse;
+
+function atualizarGraficos(resumo) {
+    var notas = [
+        Number(resumo.nota5),
+        Number(resumo.nota4),
+        Number(resumo.nota3),
+        Number(resumo.nota2),
+        Number(resumo.nota1)
+    ];
+
+    var totalSim = Number(resumo.totalSim);
+    var totalNao = Number(resumo.totalNao);
+
+    if (!graficoNotas) {
+        graficoNotas = new Chart(document.getElementById("graficoNotas"), {
+            type: "bar",
+            data: {
+                labels: ["5 ★", "4 ★", "3 ★", "2 ★", "1 ★"],
+                datasets: [{
+                    label: "Avaliações",
+                    backgroundColor: "#dedee2"
+                }]
+            },
+            options: {
+                indexAxis: "y",
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { beginAtZero: true, ticks: { precision: 0, color: "#dedee2" } },
+                    y: { ticks: { color: "#dedee2" } }
+                }
+            }
+        });
+
+        graficoInteresse = new Chart(document.getElementById("graficoInteresse"), {
+            type: "bar",
+            data: {
+                labels: ["Respostas"],
+                datasets: [
+                    { label: "Sim", backgroundColor: "#53c991" },
+                    { label: "Não", backgroundColor: "#ff7575" }
+                ]
+            },
+            options: {
+                indexAxis: "y",
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { stacked: true, beginAtZero: true, ticks: { precision: 0, color: "#dedee2" } },
+                    y: { stacked: true, display: false }
+                }
+            }
+        });
+    }
+
+    graficoNotas.data.datasets[0].data = notas;
+    graficoInteresse.data.datasets[0].data = [totalSim];
+    graficoInteresse.data.datasets[1].data = [totalNao];
+
+    document.getElementById("legendaSim").textContent = "Sim · " + totalSim;
+    document.getElementById("legendaNao").textContent = "Não · " + totalNao;
+
+    graficoNotas.update();
+    graficoInteresse.update();
+}
 
 async function carregarComentarios() {
     var lista = document.getElementById("listaComentarios");
@@ -150,8 +219,12 @@ async function carregarComentarios() {
             detalhes.className = "detalhe meta-comentario";
 
             var data = new Date(item.criado_em).toLocaleString("pt-BR");
-            detalhes.textContent = item.nome + " · " + data +
-                " · Nota: " + item.nota + " de 5";
+            detalhes.textContent = item.nome + " · " + data;
+
+            var notaComentario = document.createElement("b");
+            notaComentario.className = "nota-comentario";
+            notaComentario.textContent = "★ " + item.nota + " de 5";
+            detalhes.appendChild(notaComentario);
 
             var respostaInteresse = document.createElement("span");
             respostaInteresse.textContent = "Interesse: ";
@@ -186,8 +259,6 @@ async function carregarComentarios() {
         document.getElementById("graficos").hidden = mostrar;
         abaAvaliacoes.setAttribute("aria-pressed", !mostrar);
         abaComentarios.setAttribute("aria-pressed", mostrar);
-
-        carregarComentarios();
     }
            
 
@@ -212,6 +283,7 @@ async function carregarResumo() {
         }
 
         var resumo = await resposta.json();
+        atualizarGraficos(resumo);
         var totalSim = Number(resumo.totalSim);
         var totalInteresse = totalSim + Number(resumo.totalNao);
 
@@ -227,8 +299,23 @@ async function carregarResumo() {
     }
 }
 
-  mostrarComentarios(window.location.hash === "#comentarios");
-    carregarResumo();
+    async function atualizarDashboard() {
+        await Promise.all([
+            carregarResumo(),
+            carregarComentarios()
+    ]);
+
+    setTimeout(atualizarDashboard, 5000);
+}
+
+    if (!sessionStorage.ID_USUARIO) {
+        window.location.replace("/login.html");
+    } else if (sessionStorage.PERFIL_USUARIO !== "admin") {
+        window.location.replace("/conte-para-nos.html");
+    } else {
+        mostrarComentarios(window.location.hash === "#comentarios");
+        atualizarDashboard();
+    }
     
 
     let proximaAtualizacao;

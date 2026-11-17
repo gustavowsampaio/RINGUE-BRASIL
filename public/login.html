@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/assets/icon/bandeira-ringue-brasil.svg">
 </head>
 
 <body>
@@ -116,7 +117,8 @@
 
             <div id="div_aguardar" class="loading-div">
 
-                <img src="./assets/circle-loading.gif" id="loading-gif">
+                <img src="css/loading.gif" id="loading-gif">
+
 
             </div>
 
@@ -187,6 +189,7 @@
                         sessionStorage.EMAIL_USUARIO = json.email;
                         sessionStorage.NOME_USUARIO = json.nome;
                         sessionStorage.ID_USUARIO = json.id;
+                        sessionStorage.PERFIL_USUARIO = json.perfil;
 
                         setTimeout(function () {
                             if(json.perfil === "admin") {

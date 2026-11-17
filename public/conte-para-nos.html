@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ringue Brasil | Conte para nós</title>
     <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
+    <link rel="icon" type="image/svg+xml" href="/assets/icon/bandeira-ringue-brasil.svg">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
@@ -80,6 +80,11 @@
         </form>
     </main>
     <script>
+        var idUsuario = Number(sessionStorage.ID_USUARIO);
+        if (!Number.isInteger(idUsuario) || idUsuario < 1) {
+            window.location.replace("/login.html");
+        }
+
         var formulario = document.querySelector(".experiencia-formulario");
 
         formulario.addEventListener("submit", async function (evento) {
@@ -104,6 +109,7 @@
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+                idUsuario: idUsuario,
                 nota: Number(nota),
                 interesse: interesse,
                 comentario: dados.get("comentario")

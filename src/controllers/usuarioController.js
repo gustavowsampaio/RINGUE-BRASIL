@@ -10,27 +10,16 @@ function autenticar(req, res) {
 
     usuarioModel.autenticar(email.trim(), senha)
         .then(function (resultado) {
-                if (resultado.length === 1) {
-    var usuario = resultado[0];
+            if (resultado.length === 1) {
+                var usuario = resultado[0];
 
-    return req.session.regenerate(function (erro) {
-        if (erro) {
-            return res.status(500).send("Erro ao iniciar a sessão.");
-        }
-
-        req.session.usuario = {
-            id: usuario.id,
-            perfil: usuario.perfil
-        };
-
-        return res.json({
-            id: usuario.id,
-            nome: usuario.nome,
-            email: usuario.email,
-            perfil: usuario.perfil
-        });
-    });
-}
+                return res.json({
+                    id: usuario.id,
+                    nome: usuario.nome,
+                    email: usuario.email,
+                    perfil: usuario.perfil
+                });
+            }
             return res.status(403).send("E-mail e/ou senha inválidos.");
         })
         .catch(function (erro) {

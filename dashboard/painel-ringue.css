@@ -282,3 +282,20 @@
         flex-wrap: wrap;
     }
 }
+.painel-ringue .area-grafico {
+    position: relative;
+    margin-top: 12px;
+}
+
+.painel-ringue .area-grafico-notas {
+    height: 190px;
+}
+
+.painel-ringue .area-grafico-interesse {
+    height: 80px;
+}
+
+.painel-ringue .nota-comentario {
+    color: #ffcc00;
+    font-size: 16px;
+}

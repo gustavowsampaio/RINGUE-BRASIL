@@ -7,7 +7,6 @@ var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
 require("dotenv").config({ path: caminho_env });
 
-var session = require("express-session")
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
@@ -27,25 +26,7 @@ var empresasRouter = require("./src/routes/empresas");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        httpOnly: true,
-        sameSite: "lax"
-    }
-}));
-app.use("/dashboard", function (req, res, next) {
-    var usuario = req.session.usuario;
-    if (!usuario) {
-        return res.redirect("/login.html");
-    }
-    if (usuario.perfil !== "admin") {
-        return res.status(403).send("Acesso restrito ao administrador.");
-    }
-    next();
-}, express.static(path.join(__dirname, "dashboard")));
+app.use("/dashboard", express.static(path.join(__dirname, "dashboard")));
 
 app.use(express.static(path.join(__dirname, "public")));
 

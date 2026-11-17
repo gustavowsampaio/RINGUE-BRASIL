@@ -1,14 +1,11 @@
 var avaliacaoModel = require("../models/avaliacaoModel");
 
 function cadastrar(req, res) {
-    var usuario = req.session.usuario;
+    var { idUsuario, nota, interesse, comentario } = req.body;
 
-    if (!usuario) {
-        return res.status(401).send("Faça login para enviar uma avaliação.");
+    if (!Number.isInteger(idUsuario) || idUsuario < 1) {
+        return res.status(400).send("Informe um usuário válido.");
     }
-
-    var { nota, interesse, comentario } = req.body;
-
     if (!Number.isInteger(nota) || nota < 1 || nota > 5) {
         return res.status(400).send("Escolha uma nota de 1 a 5.");
     }
@@ -24,27 +21,20 @@ function cadastrar(req, res) {
 
     var texto = comentario == null ? null : comentario.trim() || null;
 
-    avaliacaoModel.cadastrar(usuario.id, nota, interesse, texto)
+    avaliacaoModel.cadastrar(idUsuario, nota, interesse, texto)
         .then(function () {
             return res.status(201).send("Avaliação enviada!");
         })
         .catch(function (erro) {
+            if (erro.code === "ER_NO_REFERENCED_ROW_2") {
+                return res.status(400).send("Usuário não encontrado.");
+            }
             console.log("Erro ao salvar avaliação:", erro);
             return res.status(500).send("Erro ao salvar a avaliação.");
         });
 }
 
 function listarComentarios(req, res) {
-    var usuario = req.session.usuario;
-
-    if (!usuario) {
-        return res.status(401).send("Faça login para continuar.");
-    }
-
-    if (usuario.perfil !== "admin") {
-        return res.status(403).send("Acesso restrito ao administrador.");
-    }
-
     avaliacaoModel.listarComentarios()
         .then(function (comentarios) {
             return res.json(comentarios);
@@ -56,16 +46,6 @@ function listarComentarios(req, res) {
 }
 
 function buscarResumo(req, res) {
-    var usuario = req.session.usuario;
-
-    if (!usuario) {
-        return res.status(401).send("Faça login para continuar.");
-    }
-
-    if (usuario.perfil !== "admin") {
-        return res.status(403).send("Acesso restrito ao administrador.");
-    }
-
     avaliacaoModel.buscarResumo()
         .then(function (resultado) {
             return res.json(resultado[0]);
