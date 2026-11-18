@@ -1,5 +1,5 @@
 -- Execute este script no MySQL Workbench antes de testar o cadastro.
-CREATE DATABASE IF NOT EXISTS ringue_brasil;
+CREATE DATABASE ringue_brasil;
 USE ringue_brasil;
 
 CREATE TABLE usuario (
