@@ -11,6 +11,7 @@
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
+    <!-- Define o ícone da aba do navegador. -->
     <link rel="icon" type="image/svg+xml" href="/assets/icon/bandeira-ringue-brasil.svg">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
@@ -20,31 +21,33 @@
 <body>
 
     <!-- navbar -->
-<header class="cabecalho">
+<!-- Barra de navegação do site. -->
+    <!-- Contêiner compartilhado da barra de navegação. -->
+    <div class="cabecalho">
+        <div class="container-navbar">
+            <div class="logo">
+                <img src="css/WWEbrasilLOGO.png" alt="Logo Ringue Brasil">
+            </div>
 
-        <!-- Logo -->
-        <div class="logo">
-            <img src="css/WWEbrasilLOGO.png" alt="Logo Ringue Brasil">
+            <div class="menu">
+                <a href="index.html">Início</a>
+                <a href="index.html#sobre">Sobre</a>
+            </div>
+
+            <div class="botao-entrar">
+                <a href="login.html">ENTRAR</a>
+            </div>
         </div>
+    </div>
 
-        <!-- Menu de navegação -->
-        <nav class="menu">
-            <a href="index.html">Início</a>
-            <a href="#sobre">Sobre</a>
-        </nav>
 
-        <!-- Botão de entrada -->
-        <div class="botao-entrar">
-            <a href="login.html">ENTRAR</a>
-        </div>
-
-    </header>
 
   
 <!-- banner -->
 
 <main>
 
+    <!-- Apresentação principal do Ringue Brasil. -->
     <section class="banner">
 
         <div class="banner-conteudo">
@@ -73,9 +76,10 @@
 </main>
 
 
-</header>
 
 
+
+<!-- Seção com os cards sobre luta livre. -->
 <section class="sobre" id="sobre">
 
     <div class="sobre-cabecalho">
@@ -86,34 +90,121 @@
 
     <div class="cards-container">
 
-<div class="cards-container">
-
     <!-- Card 1 -->
     <a href="luta-livre.html" class="card">
-        <img src="https://www.gdnonline.com/gdnimages/20180103/20180103141045wwerefs.JPG"
-             alt="Árbitros da WWE">
+        <div class="foto-prototipo foto-arbitros">
+                    <img src="assets/img/prototipo-home.png" alt="Árbitros da WWE">
+                </div>
 
         <h3>O Que é a Luta Livre?</h3>
     </a>
 
     <!-- Card 2 -->
     <a href="historia.html" class="card">
-        <img src="https://www.wwe.com/f/video/thumb/2026/04/0611527d-bea1-479f-b473-e4ef19f40742.jpg"
-             alt="Stone Cold e The Rock">
+        <div class="foto-prototipo foto-historia">
+                    <img src="assets/img/prototipo-home.png" alt="Stone Cold e The Rock">
+                </div>
 
         <h3>Sua História</h3>
     </a>
 
     <!-- Card 3 -->
     <a href="luta-livre-hoje.html" class="card">
-        <img src="https://images2.minutemediacdn.com/image/upload/v1756736398/images/voltaxMediaLibrary/mmsport/wrestling_on_fannation/01k42tc888acnt302bz7.jpg"
-             alt="Roman Reigns no ringue">
+        <div class="foto-prototipo foto-roman">
+                    <img src="assets/img/prototipo-home.png" alt="Roman Reigns no ringue">
+                </div>
 
         <h3>Luta Livre Hoje</h3>
     </a>
 
 </div>
 
-  </body>
+    </section>
+
+    <!-- Fundo compartilhado pelas duas apresentações. -->
+    <div class="apresentacoes">
+        <!-- Apresentação pessoal do autor. -->
+        <div class="sobre-autor">
+            <span class="etiqueta-autor">SOBRE MIM</span>
+
+            <div class="conteudo-autor">
+                <div class="texto-autor">
+                    <h2>Feito por um fã apaixonado</h2>
+                    <p>
+                        Minha história começa em 2016. Navegando pelos canais de
+                        televisão, vi uma luta na WWE com muitos saltos, acrobacias
+                        e uma plateia cheia de energia, gritando “Fight Forever”.
+                        Isso significa que aquela luta está tão boa que eles
+                        querem que dure para sempre. Essa energia me conquistou
+                        e me tornou fã de carteirinha desse esporte.
+                    </p>
+                </div>
+
+                <div class="imagem-autor">
+                    <img src="assets/img/gustavo-perfil.jpg" alt="Gustavo, autor do Ringue Brasil">
+                </div>
+            </div>
+        </div>
+
+        <!-- Apresentação do lutador favorito. -->
+        <div class="lutador-favorito">
+            
+
+            <div class="conteudo-autor">
+                <div class="texto-autor">
+                    <h2>Meu lutador favorito</h2>
+                    <p>
+                        <b>Seth Rollins</b> possui um estilo egocêntrico e habilidades
+                        no ringue que fazem dele um dos meus favoritos. Na minha
+                        opinião sua melhor fase foi
+                        entre 2016 e 2018. Ele ganhou notoriedade após comprar
+                        uma rivalidade com a “Autoridade”, grupo do qual fazia
+                        parte. Depois de perder seu título e ser traído por eles,
+                        sua história passou a ser uma busca por vingança.
+                    </p>
+                </div>
+
+                <div class="imagem-lutador">
+                    <div class="foto-prototipo foto-seth">
+                    <img src="assets/img/prototipo-home.png" alt="Seth Rollins levantando o cinturão no ringue">
+                </div>
+                    <h3>Seth Rollins</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé com os passos para avaliar o site. -->
+    <div class="rodape">
+        <span class="titulo-feedback">Dê o seu feedback!</span>
+
+        <div class="passos-feedback">
+            <div class="passo-feedback">
+                <h3>1 - Crie sua conta</h3>
+                <p>Faça seu cadastro e login clicando <a href="cadastro.html">aqui</a>.</p>
+            </div>
+
+            <div class="passo-feedback">
+                <h3>2 - Nos conte sua experiência</h3>
+                <p>
+                    Deixe sua avaliação, seu interesse pelo esporte
+                    e um comentário para melhorar este site.
+                </p>
+            </div>
+
+            <div class="passo-feedback">
+                <h3>3 - Ajude a crescer esta comunidade</h3>
+                <p>
+                    Juntos, podemos construir uma comunidade
+                    forte no Brasil <span class="coracao">♥</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="creditos">
+            <p>Feito com amor por Gustavo W. &hearts; SPTech &copy; 2023–2026</p>
+        </div>
+    </div>
+</body>
 
 </html>

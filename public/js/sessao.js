@@ -1,4 +1,5 @@
 // sessão
+// Confere os dados do login guardados no navegador.
 function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
@@ -12,6 +13,7 @@ function validarSessao() {
     }
 }
 
+// Limpa o login desta aba e volta para a página de entrada.
 function limparSessao() {
     sessionStorage.clear();
     window.location.replace("/login.html");

@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Define o ícone da aba do navegador. -->
     <link rel="icon" type="image/svg+xml" href="/assets/icon/bandeira-ringue-brasil.svg">
 </head>
 
@@ -24,25 +25,26 @@
 
     <!-- Cabeçalho -->
 
- <header class="cabecalho">
+ <!-- Barra de navegação do site. -->
+     <!-- Contêiner compartilhado da barra de navegação. -->
+    <div class="cabecalho">
+        <div class="container-navbar">
+            <div class="logo">
+                <img src="css/WWEbrasilLOGO.png" alt="Logo Ringue Brasil">
+            </div>
 
-        <!-- Logo -->
-        <div class="logo">
-            <img src="css/WWEbrasilLOGO.png" alt="Logo Ringue Brasil">
+            <div class="menu">
+                <a href="index.html">Início</a>
+                <a href="index.html#sobre">Sobre</a>
+            </div>
+
+            <div class="botao-entrar">
+                <a href="login.html">ENTRAR</a>
+            </div>
         </div>
+    </div>
 
-        <!-- Menu de navegação -->
-        <nav class="menu">
-            <a href="index.html">Início</a>
-            <a href="index.html#sobre">Sobre</a>
-        </nav>
 
-        <!-- Botão de entrada -->
-        <div class="botao-entrar">
-            <a href="login.html">ENTRAR</a>
-        </div>
-
-    </header>
 
 
     <!-- Tela de cadastro -->
@@ -60,7 +62,7 @@
                     <input
                         id="nome_input"
                         type="text"
-                        placeholder="Seu nome"
+                        
                     >
                 </div>
 
@@ -69,7 +71,7 @@
                     <input
                         id="email_input"
                         type="text"
-                        placeholder="meuemail@provedor.com"
+                        
                     >
                 </div>
 
@@ -78,7 +80,7 @@
                     <input
                         id="senha_input"
                         type="password"
-                        placeholder="Digite sua senha"
+                        
                     >
                 </div>
 
@@ -87,7 +89,7 @@
                     <input
                         id="confirmacao_senha_input"
                         type="password"
-                        placeholder="Confirme sua senha"
+                       
                     >
                 </div>
 
@@ -126,6 +128,7 @@
 
     <script>
 
+        // Cadastra os dados recebidos.
         function cadastrar() {
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
@@ -149,6 +152,7 @@
         return false;
     }
 
+    // Envia o cadastro para o servidor.
     fetch("/usuarios/cadastrar", {
         method: "POST",
         headers: {

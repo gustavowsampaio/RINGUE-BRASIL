@@ -6,30 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ringue Brasil | Conte para nós</title>
     <link rel="stylesheet" href="./css/estilo.css">
+    <!-- Define o ícone da aba do navegador. -->
     <link rel="icon" type="image/svg+xml" href="/assets/icon/bandeira-ringue-brasil.svg">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <header class="cabecalho">
-        <div class="logo">
-            <img src="css/WWEbrasilLOGO.png" alt="Logo Ringue Brasil">
-        </div>
+    <!-- Barra de navegação do site. -->
+        <!-- Contêiner compartilhado da barra de navegação. -->
+    <div class="cabecalho">
+        <div class="container-navbar">
+            <div class="logo">
+                <img src="css/WWEbrasilLOGO.png" alt="Logo Ringue Brasil">
+            </div>
 
-        <nav class="menu">
-            <a href="index.html">Início</a>
-            <a href="index.html#sobre">Sobre</a>
-        </nav>
+            <div class="menu">
+                <a href="index.html">Início</a>
+                <a href="index.html#sobre">Sobre</a>
+            </div>
 
-        <div class="botao-entrar">
-            <a href="login.html">ENTRAR</a>
+            <div class="botao-entrar">
+                <a href="login.html">ENTRAR</a>
+            </div>
         </div>
-    </header>
+    </div>
+
+
 
     <main class="experiencia">
         <p class="experiencia-etiqueta">Sua experiência</p>
         <h1>Conte para nós</h1>
 
+        <!-- Formulário de avaliação do site. -->
         <form class="experiencia-formulario">
             <div class="experiencia-perguntas">
                 <fieldset>
@@ -80,6 +88,7 @@
         </form>
     </main>
     <script>
+        // Lê o ID do usuário para enviar a avaliação.
         var idUsuario = Number(sessionStorage.ID_USUARIO);
         if (!Number.isInteger(idUsuario) || idUsuario < 1) {
             window.location.replace("/login.html");
@@ -87,6 +96,7 @@
 
         var formulario = document.querySelector(".experiencia-formulario");
 
+        // Lê o formulário e envia a avaliação para a API.
         formulario.addEventListener("submit", async function (evento) {
     evento.preventDefault();
 

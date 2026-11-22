@@ -1,3 +1,4 @@
+/* Fontes do Ringue Brasil. */
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600&display=swap');
 .painel-ringue * {
     box-sizing: border-box;
@@ -30,6 +31,7 @@
     font-weight: 600;
 }
 
+/* Organiza os cartões de indicadores. */
 .painel-ringue .resumo {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(min(100%,190px),1fr));
@@ -50,6 +52,7 @@
     margin-top: 6px;
 }
 
+/* Organiza os dois gráficos. */
 .painel-ringue .paineis {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(min(100%,280px),1fr));
@@ -147,6 +150,7 @@
     grid-template-columns: minmax(195px, 20%) minmax(0, 1fr);
 }
 
+/* Posiciona o menu lateral. */
 .painel-ringue .header-left {
     position: sticky;
     align-self: start;
@@ -171,6 +175,7 @@
     white-space: nowrap;
 }
 
+/* Mostra só a bandeira da logo. */
 .painel-ringue .bandeira {
     position: relative;
     flex: 0 0 34px;
@@ -225,6 +230,7 @@
     color: #141414;
 }
 
+/* Coloca o comentário ao lado dos dados do autor. */
 .painel-ringue .comentario-completo {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(145px, 28%);
@@ -240,7 +246,9 @@
     border-left: 1px solid #353538;
 }
 
+/* Ajustes para telas menores. */
 @media (max-width: 480px) {
+    /* Coloca o comentário ao lado dos dados do autor. */
     .painel-ringue .comentario-completo {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -262,11 +270,13 @@
     color: #ff7575;
 }
 
+/* Ajustes para telas menores. */
 @media (max-width: 620px) {
     .painel-ringue .janela {
         grid-template-columns: minmax(0, 1fr);
     }
 
+    /* Posiciona o menu lateral. */
     .painel-ringue .header-left {
         position: static;
         height: auto;
@@ -282,6 +292,7 @@
         flex-wrap: wrap;
     }
 }
+/* Controla o espaço dos gráficos. */
 .painel-ringue .area-grafico {
     position: relative;
     margin-top: 12px;
@@ -295,6 +306,7 @@
     height: 80px;
 }
 
+/* Destaca a nota em amarelo. */
 .painel-ringue .nota-comentario {
     color: #ffcc00;
     font-size: 16px;

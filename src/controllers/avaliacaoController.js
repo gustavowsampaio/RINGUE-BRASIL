@@ -1,5 +1,6 @@
 var avaliacaoModel = require("../models/avaliacaoModel");
 
+// Cadastra os dados recebidos.
 function cadastrar(req, res) {
     var { idUsuario, nota, interesse, comentario } = req.body;
 
@@ -34,6 +35,7 @@ function cadastrar(req, res) {
         });
 }
 
+// Busca os comentários mais recentes.
 function listarComentarios(req, res) {
     avaliacaoModel.listarComentarios()
         .then(function (comentarios) {
@@ -45,6 +47,7 @@ function listarComentarios(req, res) {
         });
 }
 
+// Busca os totais e a média das avaliações.
 function buscarResumo(req, res) {
     avaliacaoModel.buscarResumo()
         .then(function (resultado) {
@@ -56,4 +59,5 @@ function buscarResumo(req, res) {
         });
 }
 
+// Permite usar estas funções em outros arquivos.
 module.exports = { cadastrar, listarComentarios, buscarResumo };

@@ -1,5 +1,6 @@
 var database = require("../database/config");
 
+// Cadastra os dados recebidos.
 function cadastrar(idUsuario, nota, interesse, comentario) {
     var instrucaoSql = `
         INSERT INTO avaliacao (fk_usuario, nota, interesse, comentario) VALUES
@@ -12,6 +13,7 @@ return database.executar(instrucaoSql, [
 ]);
 }
 
+// Busca os comentários mais recentes.
 function listarComentarios() {
     var instrucaoSql = `
         SELECT u.nome, a.nota, a.interesse, a.comentario, a.criado_em
@@ -25,6 +27,7 @@ function listarComentarios() {
 return database.executar(instrucaoSql);
 }
 
+// Busca os totais e a média das avaliações.
 function buscarResumo() {
     var instrucaoSql = `
         SELECT
@@ -43,4 +46,5 @@ function buscarResumo() {
     return database.executar(instrucaoSql);
 }
 
+// Permite usar estas funções em outros arquivos.
 module.exports = { cadastrar, listarComentarios, buscarResumo };

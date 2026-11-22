@@ -1,5 +1,6 @@
 var usuarioModel = require("../models/usuarioModel");
 
+// Confere o login e retorna os dados da conta.
 function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
@@ -28,6 +29,7 @@ function autenticar(req, res) {
         });
 }
 
+// Cadastra os dados recebidos.
 function cadastrar(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
@@ -55,4 +57,5 @@ function cadastrar(req, res) {
         });
 }
 
+// Permite usar estas funções em outros arquivos.
 module.exports = { autenticar, cadastrar };

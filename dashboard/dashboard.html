@@ -2,6 +2,7 @@
 <html lang="pt-br">
 
 <head>
+    <!-- Define o ícone da aba do navegador. -->
     <link rel="icon" type="image/svg+xml" href="/assets/icon/bandeira-ringue-brasil.svg">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,6 +33,7 @@
 <body class="painel-ringue">
 
     <div class="janela">
+        <!-- Menu lateral da dashboard. -->
         <div class="header-left">
             <h1>
                 <span class="bandeira" aria-hidden="true">
@@ -52,12 +54,14 @@
         <div class="dash">
             <section id="avaliacoes" class="conteudo" aria-labelledby="tituloAvaliacoes">
               <h1 id="tituloAvaliacoes">Avaliações do site</h1>
+              <!-- Cartões preenchidos com os dados da API. -->
               <div class="resumo" aria-label="Resumo das avaliações">
                 <div class="numero">Avaliações recebidas<b id="totalAvaliacoes">—</b></div>
                 <div class="numero">Nota média<b id="mediaAvaliacoes">—</b></div>
                 <div class="numero">Criaram interesse em luta livre<b id="percentualInteresse">—</b></div>
               </div>
               <p id="statusResumo" role="status"></p>
+              <!-- Gráficos de notas e interesse. -->
               <div class="paineis">
     <section class="painel">
         <h2>Distribuição das notas</h2>
@@ -81,9 +85,11 @@
 
 <section class="comentarios">
     <h2>Comentários recentes</h2>
+    <!-- Espaço para os dois comentários mais recentes. -->
     <div id="comentariosRecentes"></div>
 </section>
             </section>
+            <!-- Aba que mostra os comentários recebidos. -->
             <section id="comentarios" class="conteudo" aria-labelledby="tituloComentarios" hidden>
                 <h1 id="tituloComentarios">Comentários</h1>
                 <p id="statusComentarios" role="status"></p>
@@ -115,6 +121,7 @@
     var graficoNotas;
     var graficoInteresse;
 
+// Cria os gráficos e atualiza seus valores.
 function atualizarGraficos(resumo) {
     var notas = [
         Number(resumo.nota5),
@@ -180,6 +187,7 @@ function atualizarGraficos(resumo) {
     graficoInteresse.update();
 }
 
+// Busca os comentários na API e mostra nas duas abas.
 async function carregarComentarios() {
     var lista = document.getElementById("listaComentarios");
     var status = document.getElementById("statusComentarios");
@@ -251,6 +259,7 @@ async function carregarComentarios() {
     }
 }
 
+    // Alterna entre Gráficos e Comentários.
     function mostrarComentarios(mostrar) {
         document.getElementById("avaliacoes").hidden = mostrar;
         document.getElementById("comentarios").hidden = !mostrar;
@@ -269,6 +278,7 @@ async function carregarComentarios() {
     abaComentarios.addEventListener("click", function () {
         mostrarComentarios(true);
     });
+// Busca os dados reais e preenche os cartões e gráficos.
 async function carregarResumo() {
     var status = document.getElementById("statusResumo");
 
@@ -299,6 +309,7 @@ async function carregarResumo() {
     }
 }
 
+    // Atualiza os dados e repete a consulta após cinco segundos.
     async function atualizarDashboard() {
         await Promise.all([
             carregarResumo(),
@@ -308,6 +319,7 @@ async function carregarResumo() {
     setTimeout(atualizarDashboard, 5000);
 }
 
+    // Confere o login e o perfil antes de abrir o painel.
     if (!sessionStorage.ID_USUARIO) {
         window.location.replace("/login.html");
     } else if (sessionStorage.PERFIL_USUARIO !== "admin") {
@@ -320,6 +332,7 @@ async function carregarResumo() {
 
     let proximaAtualizacao;
 
+    // Trecho original do Web Data Viz para aquários.
     if (sessionStorage.AQUARIOS) {
         window.addEventListener("load", exibirAquariosDoUsuario);
     }

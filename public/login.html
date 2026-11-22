@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Define o ícone da aba do navegador. -->
     <link rel="icon" type="image/svg+xml" href="/assets/icon/bandeira-ringue-brasil.svg">
 </head>
 
@@ -25,25 +26,26 @@
     <!-- Cabeçalho -->
 
     <!-- navbar -->
-<header class="cabecalho">
+<!-- Barra de navegação do site. -->
+    <!-- Contêiner compartilhado da barra de navegação. -->
+    <div class="cabecalho">
+        <div class="container-navbar">
+            <div class="logo">
+                <img src="css/WWEbrasilLOGO.png" alt="Logo Ringue Brasil">
+            </div>
 
-        <!-- Logo -->
-        <div class="logo">
-            <img src="css/WWEbrasilLOGO.png" alt="Logo Ringue Brasil">
+            <div class="menu">
+                <a href="index.html">Início</a>
+                <a href="index.html#sobre">Sobre</a>
+            </div>
+
+            <div class="botao-entrar">
+                <a href="login.html">ENTRAR</a>
+            </div>
         </div>
+    </div>
 
-        <!-- Menu de navegação -->
-        <nav class="menu">
-            <a href="index.html">Início</a>
-            <a href="index.html#sobre">Sobre</a>
-        </nav>
 
-        <!-- Botão de entrada -->
-        <div class="botao-entrar">
-            <a href="login.html">ENTRAR</a>
-        </div>
-
-    </header>
 
     <!-- Tela de login -->
 
@@ -133,6 +135,7 @@
 
     <script>
 
+        // Envia e-mail e senha para conferir o login.
         function entrar() {
 
             aguardar();
@@ -159,6 +162,7 @@
 
             console.log("FORM LOGIN: ", emailVar);
 
+            // Envia as credenciais para o servidor.
             fetch("/usuarios/autenticar", {
 
                 method: "POST",
@@ -186,12 +190,14 @@
 
                         console.log(json);
 
+                        // Guarda os dados da conta nesta aba.
                         sessionStorage.EMAIL_USUARIO = json.email;
                         sessionStorage.NOME_USUARIO = json.nome;
                         sessionStorage.ID_USUARIO = json.id;
                         sessionStorage.PERFIL_USUARIO = json.perfil;
 
                         setTimeout(function () {
+                            // Escolhe a página de destino conforme o perfil.
                             if(json.perfil === "admin") {
                             window.location = "./dashboard/dashboard.html";
                             } else {

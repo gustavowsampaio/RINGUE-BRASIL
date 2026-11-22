@@ -2,6 +2,7 @@
 CREATE DATABASE ringue_brasil;
 USE ringue_brasil;
 
+-- Contas usadas no cadastro e no login.
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -10,6 +11,7 @@ CREATE TABLE usuario (
     perfil ENUM('usuario', 'admin') NOT NULL DEFAULT 'usuario'
 );
 
+-- Avaliações ligadas ao usuário que fez o envio.
 CREATE TABLE avaliacao (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fk_usuario INT NOT NULL,

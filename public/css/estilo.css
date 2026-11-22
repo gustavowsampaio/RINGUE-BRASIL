@@ -23,26 +23,34 @@ body {
     width: 100%;
     height: 80px;
     background-color: #000000;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 40px 0 35px;
     position: sticky;
     top: 0;
     z-index: 10;
+    font-family: Arial, sans-serif;
+}
+
+/* Centraliza e alinha a navbar em todas as páginas. */
+.container-navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1366px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 40px 0 35px;
 }
 
 /* Logo */
 
 .logo img {
-    width: 300px;
+    width: 190px;
     height: auto;
     display: block;
 
     position: relative;
-    top: 4px;
+    top: 0px;
 }
 
 /* Menu */
@@ -67,6 +75,7 @@ body {
 /* Botão entrar */
 
 .botao-entrar a,
+/* Estilo do botão de envio. */
 .botao-avaliacao {
     display: flex;
     align-items: center;
@@ -86,8 +95,9 @@ body {
 }
 
 
+/* Ajustes para telas menores. */
 @media (max-width: 900px) {
-    .cabecalho {
+    .container-navbar {
         padding: 0 12px;
     }
 
@@ -122,7 +132,7 @@ body {
             rgba(0, 0, 0, 0.35),
             rgba(0, 0, 0, 0.35)
         ),
-        url("https://images.openai.com/static-rsc-4/78-VRrUqy981mFHwybbYTJFrsbYWnpjHXAHt39AWOnDlucPSBMt74Sf-8QTCf_jrkVhdkZZG2HvxalGk7abB2ys5Fq9Tw8A-8nWiyc5Vd-wuM5p7jLjef9sF9TJta64DqVKXd81RJ5iyb3RMZpevnrqqpzYayUYfI0uUpo_DrcOnTkuYN8Vu_eKgYJK6-5Ft?purpose=fullsize");
+        url("./ringuel.png");
 
     background-size: cover;
     background-position: center;
@@ -294,6 +304,7 @@ body {
     flex-shrink: 0;
 }
 
+/* Move o card ao passar o mouse. */
 .card:hover {
   transform: translateY(-6px);
 }
@@ -330,16 +341,6 @@ body {
     width: 100%;
     min-height: calc(100vh - 80px);
 
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.15),
-            rgba(0, 0, 0, 0.15)
-        ),
-        url("");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 
     display: flex;
     justify-content: center;
@@ -487,16 +488,6 @@ body {
     width: 100%;
     min-height: calc(100vh - 80px);
 
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.20),
-            rgba(0, 0, 0, 0.20)
-        ),
-        url("../assets/fundo-login.jpg");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 
     display: flex;
     justify-content: center;
@@ -640,6 +631,7 @@ body {
 /* ============================= */
 /* CONTE PARA NÓS */
 /* ============================= */
+/* Estilo de rolagem da página de avaliação. */
 html:has(.experiencia) {
     scrollbar-heigth: none;
 }
@@ -651,6 +643,7 @@ html:has(.experiencia) {
     background-color: #000;
 }
 
+/* Fundo de fumaça das seções. */
 .sobre::before,
 .experiencia::before {
     content: "";
@@ -780,12 +773,14 @@ html:has(.experiencia) {
     font: inherit;
     resize: vertical;
 }
+/* Colore a estrela escolhida e as anteriores. */
 .experiencia-opcoes label:has(input[name="nota"]:checked) > span,
 .experiencia-opcoes label:has(~ label input[name="nota"]:checked) > span {
     color: #ffcc00;
     background-color: transparent;
     box-shadow: none;
 }
+/* Estilo do botão de envio. */
 .botao-avaliacao {
     width: auto;
     margin: 12px auto 0;
@@ -798,4 +793,1055 @@ html:has(.experiencia) {
 .status-avaliacao:not(:empty) {
     margin-top: 8px;
     font-size: 14px;
+}
+
+/* Uma única fumaça para as duas apresentações. */
+.apresentacoes {
+    position: relative;
+    isolation: isolate;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Suaviza as bordas do fundo compartilhado. */
+.apresentacoes::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url("./fumaça.png") center / cover no-repeat;
+    filter: invert(1) brightness(1.7);
+    transform: scaleY(-1);
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        #000000 10%,
+        #000000 90%,
+        transparent
+    );
+}
+
+/* Altura acompanha o conteúdo de cada apresentação. */
+.sobre-autor,
+.lutador-favorito {
+    padding: 48px 40px;
+    text-align: center;
+}
+
+.etiqueta-autor {
+    display: inline-block;
+    padding: 4px 36px;
+    border-radius: 25px;
+    background-color: #dedee2;
+    color: #000000;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+}
+
+/* Organiza o texto ao lado da imagem. */
+.conteudo-autor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 36px auto 0;
+}
+
+.texto-autor {
+    flex: 1;
+    min-width: 0;
+}
+
+.texto-autor h2 {
+    margin-bottom: 28px;
+    font-family: 'Anton', sans-serif;
+    font-size: 42px;
+    font-weight: normal;
+}
+
+.texto-autor p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.imagem-autor {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.imagem-autor h3 {
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+}
+
+.imagem-autor img {
+    display: block;
+    width: 100%;
+    height: 280px;
+    border-radius: 28px;
+    object-fit: cover;
+}
+
+.imagem-lutador {
+    width: 330px;
+    flex-shrink: 0;
+}
+
+.imagem-lutador img {
+    display: block;
+    width: 100%;
+    height: 280px;
+    border-radius: 28px;
+    object-fit: cover;
+}
+
+.imagem-lutador h3 {
+    margin-top: 10px;
+    font-family: 'Anton', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+/* Rodapé com os passos para enviar uma avaliação. */
+.rodape {
+    background-color: #dedee2;
+    color: #000000;
+    text-align: center;
+}
+
+.titulo-feedback {
+    display: inline-block;
+    padding: 0 16px;
+    border-radius: 20px;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+}
+
+.passos-feedback {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px 28px;
+}
+
+.passo-feedback {
+    flex: 1;
+    min-width: 0;
+    padding: 0 20px;
+}
+
+.passo-feedback + .passo-feedback {
+    border-left: 3px solid #000000;
+}
+
+.passo-feedback h3 {
+    margin-bottom: 8px;
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.passo-feedback p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.passo-feedback a {
+    color: #164a9f;
+}
+
+.coracao {
+    color: #e53935;
+}
+
+.creditos {
+    padding: 24px 16px;
+    border-top: 1px solid #555555;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+/* Empilha o conteúdo em telas menores. */
+@media (max-width: 700px) {
+    .sobre-autor,
+    .lutador-favorito {
+        padding: 32px 20px;
+    }
+
+    .conteudo-autor {
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .texto-autor h2 {
+        font-size: 32px;
+    }
+
+    .imagem-autor,
+    .imagem-lutador {
+        width: 100%;
+        max-width: 330px;
+    }
+
+    .passos-feedback {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .passo-feedback + .passo-feedback {
+        padding-top: 20px;
+        border-left: 0;
+        border-top: 1px solid #555555;
+    }
+}
+
+/* Transição entre o fundo escuro e o rodapé. */
+.rodape::before {
+    content: "";
+    display: block;
+    height: 48px;
+    margin-bottom: 12px;
+    background: linear-gradient(to bottom, #dedee2, #dedee2);
+}
+
+.lutador-favorito .conteuto-autor {
+  align-items: flex-start;
+}
+
+/* Alinha o texto com o topo da imagem do lutador. */
+.lutador-favorito .conteudo-autor {
+    align-items: flex-start;
+}
+
+/* Mostra somente a foto correspondente na página exportada do Canva. */
+.foto-prototipo {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.card .foto-prototipo {
+    aspect-ratio: 1;
+    flex-shrink: 0;
+}
+
+.imagem-autor .foto-prototipo {
+    aspect-ratio: 1;
+}
+
+.imagem-lutador .foto-prototipo {
+    aspect-ratio: 421 / 359;
+}
+
+.foto-prototipo img {
+    position: absolute;
+    display: block;
+    max-width: none;
+    height: auto;
+    border-radius: 0;
+}
+
+.foto-arbitros img {
+    width: 380.5%;
+    left: -21.45%;
+    top: 0;
+    transform: translateY(-26.25%);
+}
+
+.foto-historia img {
+    width: 380.5%;
+    left: -143.18%;
+    top: 0;
+    transform: translateY(-26.25%);
+}
+
+.foto-roman img {
+    width: 380.5%;
+    left: -262.95%;
+    top: 0;
+    transform: translateY(-26.25%);
+}
+
+.foto-seth img {
+    width: 324.47%;
+    left: -206.18%;
+    top: 0;
+    transform: translateY(-65%);
+}
+
+/* PÁGINA O QUE É A LUTA LIVRE */
+/* Apresentação da página de conteúdo. */
+.pagina-luta {
+    background-color: #a8a8a8;
+    color: #111111;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagina-luta .cabecalho {
+    flex-shrink: 0;
+}
+
+.conteudo-luta {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 24px 24px 48px;
+    text-align: center;
+}
+
+.conteudo-luta h1 {
+    margin-bottom: 20px;
+    font: 400 32px 'Anton', sans-serif;
+}
+
+.bloco-luta {
+    margin-bottom: 64px;
+}
+
+.bloco-luta h2 {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 28px;
+    padding: 6px 36px;
+    border-radius: 28px;
+    background-color: #ffffff;
+    font: 400 26px 'Anton', sans-serif;
+}
+
+.bloco-luta > p {
+    max-width: 1100px;
+    margin: 0 auto 16px;
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+/* Organiza as fotos e suas legendas. */
+.fotos-luta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 24px;
+}
+
+.cartao-luta {
+    flex: 1 1 320px;
+    max-width: 560px;
+    min-width: 0;
+    padding: 10px;
+    border-radius: 32px;
+    background-color: #ffffff;
+}
+
+.bloco-luta:first-of-type .cartao-luta {
+    max-width: 650px;
+}
+
+.legenda-luta {
+    padding: 6px 4px 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.recorte-luta {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.recorte-luta img {
+    position: absolute;
+    display: block;
+    max-width: none;
+    height: auto;
+    top: 0;
+}
+
+/* Navegação ao final da leitura. */
+.veja-tambem {
+    max-width: 540px;
+    margin-left: auto;
+    padding: 24px;
+    border-radius: 32px;
+    background-color: #ffffff;
+}
+
+.veja-tambem h2 {
+    margin-bottom: 16px;
+    font-size: 24px;
+}
+
+.veja-tambem a {
+    display: inline-block;
+    margin: 6px 12px;
+    color: #164a9f;
+}
+
+/* Recorta as fotos da exportação do Canva. */
+.recorte-cena-rvd {
+    aspect-ratio: 625 / 334;
+}
+
+.recorte-cena-rvd img {
+    width: 218.5600%;
+    left: -56.9600%;
+    transform: translateY(-12.1094%);
+}
+
+.recorte-finn {
+    aspect-ratio: 537 / 286;
+}
+
+.recorte-finn img {
+    width: 254.3762%;
+    left: -22.3464%;
+    transform: translateY(-37.2396%);
+}
+
+.recorte-alexa {
+    aspect-ratio: 537 / 286;
+}
+
+.recorte-alexa img {
+    width: 254.3762%;
+    left: -141.1546%;
+    transform: translateY(-37.2396%);
+}
+
+.recorte-cena-vilao {
+    aspect-ratio: 537 / 286;
+}
+
+.recorte-cena-vilao img {
+    width: 254.3762%;
+    left: -22.3464%;
+    transform: translateY(-62.2396%);
+}
+
+.recorte-undertaker {
+    aspect-ratio: 537 / 286;
+}
+
+.recorte-undertaker img {
+    width: 254.3762%;
+    left: -141.1546%;
+    transform: translateY(-62.2396%);
+}
+
+.recorte-duplas {
+    aspect-ratio: 537 / 286;
+}
+
+.recorte-duplas img {
+    width: 254.3762%;
+    left: -23.6499%;
+    transform: translateY(-82.9753%);
+}
+
+.recorte-shawn {
+    aspect-ratio: 537 / 286;
+}
+
+.recorte-shawn img {
+    width: 254.3762%;
+    left: -138.3613%;
+    transform: translateY(-82.9753%);
+}
+
+/* Ajusta a leitura no celular. */
+@media (max-width: 700px) {
+    .conteudo-luta {
+        padding: 24px 16px 32px;
+    }
+
+    .bloco-luta {
+        margin-bottom: 40px;
+    }
+
+    .bloco-luta > p {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .bloco-luta h2 {
+        padding: 6px 20px;
+        font-size: 23px;
+    }
+
+    .fotos-luta {
+        gap: 20px;
+    }
+
+    .cartao-luta {
+        flex-basis: 100%;
+    }
+}
+
+/* PÁGINA HISTÓRIA DA LUTA LIVRE */
+/* Mantém o título no formato das etiquetas do protótipo. */
+.pagina-historia .bloco-luta h1 {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 28px;
+    padding: 6px 36px;
+    border-radius: 28px;
+    background-color: #ffffff;
+    font: 400 26px 'Anton', sans-serif;
+}
+
+/* Mantém os dois cartões de cada período com a mesma largura. */
+.pagina-historia .bloco-luta:first-of-type .cartao-luta {
+    max-width: 560px;
+}
+
+/* Recorta as fotos da página exportada do Canva. */
+.historia-feiras {
+    aspect-ratio: 537 / 287;
+}
+
+.historia-feiras img {
+    width: 254.3762%;
+    left: -22.3464%;
+    transform: translateY(-16.2760%);
+}
+
+.historia-hackenschmidt {
+    aspect-ratio: 537 / 287;
+}
+
+.historia-hackenschmidt img {
+    width: 254.3762%;
+    left: -141.1546%;
+    transform: translateY(-16.2760%);
+}
+
+.historia-bruno {
+    aspect-ratio: 537 / 287;
+}
+
+.historia-bruno img {
+    width: 254.3762%;
+    left: -22.3464%;
+    transform: translateY(-49.4792%);
+}
+
+.historia-buddy {
+    aspect-ratio: 537 / 287;
+}
+
+.historia-buddy img {
+    width: 254.3762%;
+    left: -141.1546%;
+    transform: translateY(-49.6528%);
+}
+
+.historia-hogan-andre {
+    aspect-ratio: 491 / 263;
+}
+
+.historia-hogan-andre img {
+    width: 278.2077%;
+    left: -34.4196%;
+    transform: translateY(-81.0330%);
+}
+
+.historia-rock-austin {
+    aspect-ratio: 491 / 263;
+}
+
+.historia-rock-austin img {
+    width: 278.2077%;
+    left: -151.3238%;
+    transform: translateY(-81.0764%);
+}
+
+
+/* PÁGINA LUTA LIVRE ATUALMENTE */
+.pagina-atualmente h1 {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 28px;
+    padding: 6px 36px;
+    border-radius: 28px;
+    background-color: #ffffff;
+    font: 400 26px 'Anton', sans-serif;
+}
+
+.data-prototipo {
+    margin-bottom: 16px;
+    text-align: right;
+    font-size: 13px;
+}
+
+/* Painéis com os logos e as imagens do elenco. */
+.painel-companhias {
+    max-width: 590px;
+    margin: 28px auto 12px;
+}
+
+.painel-eventos {
+    max-width: 820px;
+    margin: 28px auto 48px;
+}
+
+.painel-elenco {
+    margin: 28px auto 12px;
+}
+
+/* Alinha a apresentação do atleta com sua foto. */
+.perfil-atleta {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 40px 0;
+    scroll-margin-top: 100px;
+}
+
+.texto-atleta {
+    flex: 1;
+    min-width: 0;
+}
+
+.texto-atleta h3 {
+    margin-bottom: 24px;
+    font: 400 28px 'Anton', sans-serif;
+}
+
+.texto-atleta p {
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+.perfil-atleta > .foto-atual {
+    flex: 1;
+    min-width: 0;
+}
+
+.companhia-atual {
+    scroll-margin-top: 100px;
+}
+
+/* Mostra cada imagem da exportação do Canva. */
+.foto-atual {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.foto-atual img {
+    position: absolute;
+    display: block;
+    max-width: none;
+    height: auto;
+    top: 0;
+}
+
+.foto-atual-companhias {
+    aspect-ratio: 582.230 / 240.730;
+}
+
+.foto-atual-companhias img {
+    width: 234.61538%;
+    left: -67.54808%;
+    transform: translateY(-2.90569%);
+}
+
+.foto-atual-wwe-eventos {
+    aspect-ratio: 810.363 / 237.930;
+}
+
+.foto-atual-wwe-eventos img {
+    width: 168.56649%;
+    left: -34.88774%;
+    transform: translateY(-8.59557%);
+}
+
+.foto-atual-wwe-elenco {
+    aspect-ratio: 1280.625 / 351.297;
+}
+
+.foto-atual-wwe-elenco img {
+    width: 106.66667%;
+    left: -3.60656%;
+    transform: translateY(-13.45526%);
+}
+
+.foto-atual-cody {
+    aspect-ratio: 608.822 / 405.881;
+}
+
+.foto-atual-cody img {
+    width: 224.36782%;
+    left: -117.01149%;
+    transform: translateY(-17.99097%);
+}
+
+.foto-atual-bianca {
+    aspect-ratio: 608.822 / 403.082;
+}
+
+.foto-atual-bianca img {
+    width: 224.36782%;
+    left: -117.01149%;
+    transform: translateY(-23.54504%);
+}
+
+.foto-atual-roman-atual {
+    aspect-ratio: 608.822 / 403.082;
+}
+
+.foto-atual-roman-atual img {
+    width: 224.36782%;
+    left: -117.01149%;
+    transform: translateY(-29.10331%);
+}
+
+.foto-atual-seth-atual {
+    aspect-ratio: 608.822 / 403.082;
+}
+
+.foto-atual-seth-atual img {
+    width: 224.36782%;
+    left: -117.47126%;
+    transform: translateY(-34.82357%);
+}
+
+.foto-atual-aew-eventos {
+    aspect-ratio: 890.139 / 264.523;
+}
+
+.foto-atual-aew-eventos img {
+    width: 153.45912%;
+    left: -28.77358%;
+    transform: translateY(-41.67356%);
+}
+
+.foto-atual-aew-elenco {
+    aspect-ratio: 1280.625 / 349.898;
+}
+
+.foto-atual-aew-elenco img {
+    width: 106.66667%;
+    left: -3.60656%;
+    transform: translateY(-46.78636%);
+}
+
+.foto-atual-ospreay {
+    aspect-ratio: 608.822 / 404.482;
+}
+
+.foto-atual-ospreay img {
+    width: 224.36782%;
+    left: -116.78161%;
+    transform: translateY(-51.32207%);
+}
+
+.foto-atual-mercedes {
+    aspect-ratio: 608.822 / 404.482;
+}
+
+.foto-atual-mercedes img {
+    width: 224.36782%;
+    left: -117.01149%;
+    transform: translateY(-56.87021%);
+}
+
+.foto-atual-moxley {
+    aspect-ratio: 608.822 / 403.082;
+}
+
+.foto-atual-moxley img {
+    width: 224.36782%;
+    left: -117.24138%;
+    transform: translateY(-62.62677%);
+}
+
+.foto-atual-tna-eventos {
+    aspect-ratio: 890.139 / 264.523;
+}
+
+.foto-atual-tna-eventos img {
+    width: 153.45912%;
+    left: -28.30189%;
+    transform: translateY(-69.45058%);
+}
+
+.foto-atual-tna-elenco {
+    aspect-ratio: 1280.625 / 349.898;
+}
+
+.foto-atual-tna-elenco img {
+    width: 106.66667%;
+    left: -3.60656%;
+    transform: translateY(-74.56338%);
+}
+
+.foto-atual-indi {
+    aspect-ratio: 608.822 / 403.082;
+}
+
+.foto-atual-indi img {
+    width: 224.36782%;
+    left: -117.24138%;
+    transform: translateY(-79.15983%);
+}
+
+.foto-atual-leon {
+    aspect-ratio: 608.822 / 403.082;
+}
+
+.foto-atual-leon img {
+    width: 224.36782%;
+    left: -117.01149%;
+    transform: translateY(-84.85565%);
+}
+
+.foto-atual-nic {
+    aspect-ratio: 608.822 / 403.082;
+}
+
+.foto-atual-nic img {
+    width: 224.36782%;
+    left: -117.70115%;
+    transform: translateY(-90.56578%);
+}
+
+.foto-atual-mustafa {
+    aspect-ratio: 608.822 / 403.082;
+}
+
+.foto-atual-mustafa img {
+    width: 224.36782%;
+    left: -117.01149%;
+    transform: translateY(-95.96206%);
+}
+
+/* Empilha texto e foto no celular. */
+@media (max-width: 700px) {
+    .perfil-atleta {
+        flex-direction: column;
+        gap: 24px;
+        padding: 28px 0;
+    }
+
+    .texto-atleta p {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .perfil-atleta > .foto-atual {
+        flex: none;
+    }
+}
+
+/* Foto de Okada recortada da captura enviada. */
+.foto-atual-okada {
+    aspect-ratio: 406 / 269;
+}
+
+.foto-atual-okada img {
+    width: 222.66010%;
+    left: -116.25616%;
+    transform: translateY(-26.58960%);
+}
+
+/* Espaçamento entre as partes da página de companhias. */
+.pagina-atualmente .bloco-luta {
+    margin-bottom: 120px;
+}
+
+.pagina-atualmente .painel-eventos {
+    margin-top: 48px;
+    margin-bottom: 80px;
+}
+
+.pagina-atualmente .painel-elenco {
+    margin-top: 48px;
+}
+
+.pagina-atualmente .perfil-atleta {
+    padding: 72px 0;
+}
+
+/* Mantém espaços confortáveis no celular. */
+@media (max-width: 700px) {
+    .pagina-atualmente .bloco-luta {
+        margin-bottom: 80px;
+    }
+
+    .pagina-atualmente .painel-eventos {
+        margin-top: 32px;
+        margin-bottom: 48px;
+    }
+
+    .pagina-atualmente .painel-elenco {
+        margin-top: 32px;
+    }
+
+    .pagina-atualmente .perfil-atleta {
+        padding: 48px 0;
+    }
+}
+
+/* Links sobre os nomes que já aparecem nos cards do protótipo. */
+.links-nomes-card {
+    position: absolute;
+    inset: auto 0 0;
+    height: 18%;
+    display: grid;
+    background-color: #ffffff;
+}
+
+.links-nomes-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    bottom: 12%;
+    height: 21%;
+    padding: 0 4%;
+}
+
+.links-nomes-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 0 2%;
+}
+
+.links-nomes-card a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 4px;
+    color: #164a9f;
+    font: 500 clamp(10px, 1.4vw, 15px) 'Poppins', sans-serif;
+    text-align: center;
+    text-decoration: underline;
+    border-radius: 4px;
+}
+
+.links-nomes-card a:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+.links-nomes-card a:focus-visible {
+    outline: 3px solid #164a9f;
+    outline-offset: -3px;
+    background-color: rgba(22, 74, 159, 0.15);
+}
+
+/* Nomes em texto HTML sobre a faixa branca dos cards. */
+.nome-link-card {
+    display: block;
+}
+
+/* Marca d'água restrita à área de cada companhia. */
+.pagina-atualmente .companhia-atual {
+    position: relative;
+    isolation: isolate;
+}
+
+.marca-companhia {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    width: 85%;
+    max-width: 950px;
+    transform: translateX(-50%);
+    overflow: hidden;
+    z-index: -1;
+    opacity: 0.08;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+.marca-companhia img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: brightness(0);
+}
+
+
+/* Cinturões apresentados abaixo da introdução de cada companhia. */
+.pagina-atualmente .companhia-titulos {
+    margin: 48px 0 64px;
+}
+
+.pagina-atualmente .companhia-titulos h3 {
+    margin-bottom: 24px;
+    font: 400 26px 'Anton', sans-serif;
+}
+
+.pagina-atualmente .grade-titulos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 24px;
+}
+
+.pagina-atualmente .cartao-titulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 16px;
+    border-radius: 24px;
+    background-color: #ffffff;
+}
+
+.pagina-atualmente .cartao-titulo img {
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+}
+
+.pagina-atualmente .cartao-titulo h4 {
+    font: 500 15px 'Poppins', sans-serif;
+    line-height: 1.5;
+}
+
+.pagina-atualmente .fonte-titulos {
+    margin-top: 16px;
+    font-size: 12px;
+}
+
+.pagina-atualmente .fonte-titulos a {
+    color: #164a9f;
+}
+
+@media (max-width: 700px) {
+    .pagina-atualmente .companhia-titulos {
+        margin: 32px 0 40px;
+    }
+
+    .pagina-atualmente .grade-titulos {
+        gap: 16px;
+    }
+}
+
+/* Prepara a camada de fundo das duas telas. */
+.tela-login,
+.tela-cadastro {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+/* Aplica o desfoque somente na imagem. */
+.tela-login::before,
+.tela-cadastro::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    z-index: -1;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+        url("../assets/img/logincadastro.png") center / cover no-repeat;
+    filter: blur(3px);
 }

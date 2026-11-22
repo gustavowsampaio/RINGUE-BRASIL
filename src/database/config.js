@@ -1,6 +1,7 @@
 var mysql = require("mysql2");
 
 // CONEXÃO DO BANCO MYSQL SERVER
+// Define a conexão com o MySQL.
 var mySqlConfig = {
     host: process.env.DB_HOST,
     database: process.env.DB_DATABASE,
@@ -9,6 +10,7 @@ var mySqlConfig = {
     port: process.env.DB_PORT
 };
 
+// Executa o SQL e retorna o resultado do MySQL.
 function executar(instrucao, parametros = []) {
     if (process.env.AMBIENTE_PROCESSO !== "producao" && process.env.AMBIENTE_PROCESSO !== "desenvolvimento") {
         return Promise.reject("AMBIENTE NÃO CONFIGURADO EM .env");
@@ -28,6 +30,7 @@ function executar(instrucao, parametros = []) {
     });
 }
 
+// Permite usar estas funções em outros arquivos.
 module.exports = {
     executar
 };
