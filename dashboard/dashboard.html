@@ -44,15 +44,15 @@
             <div class="hello">
                 <span>Área do administrador<span id="b_usuario"></span></span>
             </div>
-            <nav class="abas" aria-label="Seções da dashboard">
+            <div class="abas" aria-label="Seções da dashboard" role="navigation">
                 <button type="button" id="abaAvaliacoes" aria-controls="avaliacoes" aria-pressed="true">Gráficos</button>
                 <button type="button" id="abaComentarios" aria-controls="comentarios" aria-pressed="false">Comentários</button>
-            </nav>
+            </div>
             <button type="button" class="btn-logout" onclick="limparSessao()">Sair</button>
         </div>
 
         <div class="dash">
-            <section id="avaliacoes" class="conteudo" aria-labelledby="tituloAvaliacoes">
+            <div id="avaliacoes" class="conteudo" aria-labelledby="tituloAvaliacoes">
               <h1 id="tituloAvaliacoes">Avaliações do site</h1>
               <!-- Cartões preenchidos com os dados da API. -->
               <div class="resumo" aria-label="Resumo das avaliações">
@@ -63,14 +63,14 @@
               <p id="statusResumo" role="status"></p>
               <!-- Gráficos de notas e interesse. -->
               <div class="paineis">
-    <section class="painel">
+    <div class="painel">
         <h2>Distribuição das notas</h2>
         <div class="area-grafico area-grafico-notas">
             <canvas id="graficoNotas" role="img" aria-label="Quantidade de avaliações por nota"></canvas>
         </div>
-    </section>
+    </div>
 
-    <section class="painel">
+    <div class="painel">
         <h2>Interesse em luta livre</h2>
         <div class="area-grafico area-grafico-interesse">
             <canvas id="graficoInteresse" role="img" aria-label="Respostas Sim e Não"></canvas>
@@ -80,21 +80,21 @@
             <span id="legendaSim" class="sim"></span>
             <span id="legendaNao" class="nao"></span>
         </div>
-    </section>
+    </div>
 </div>
 
-<section class="comentarios">
+<div class="comentarios">
     <h2>Comentários recentes</h2>
     <!-- Espaço para os dois comentários mais recentes. -->
     <div id="comentariosRecentes"></div>
-</section>
-            </section>
+</div>
+            </div>
             <!-- Aba que mostra os comentários recebidos. -->
-            <section id="comentarios" class="conteudo" aria-labelledby="tituloComentarios" hidden>
+            <div id="comentarios" class="conteudo" aria-labelledby="tituloComentarios" hidden>
                 <h1 id="tituloComentarios">Comentários</h1>
                 <p id="statusComentarios" role="status"></p>
                 <div id="listaComentarios"></div>
-            </section>
+            </div>
             <div id="alerta">
             </div>
 

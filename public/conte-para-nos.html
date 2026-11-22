@@ -33,15 +33,15 @@
 
 
 
-    <main class="experiencia">
+    <div class="experiencia" role="main">
         <p class="experiencia-etiqueta">Sua experiência</p>
         <h1>Conte para nós</h1>
 
         <!-- Formulário de avaliação do site. -->
         <form class="experiencia-formulario">
             <div class="experiencia-perguntas">
-                <fieldset>
-                    <legend>Sua experiência com o site</legend>
+                <div class="grupo-avaliacao" role="group" aria-labelledby="pergunta-avaliacao-1">
+                    <p class="titulo-pergunta" id="pergunta-avaliacao-1">Sua experiência com o site</p>
                     <div class="experiencia-opcoes">
                         <label>
                             <input type="radio" name="nota" value="1" aria-label="1 estrela">
@@ -64,10 +64,10 @@
                             <span aria-hidden="true">★</span>
                         </label>
                     </div>
-                </fieldset>
+                </div>
 
-                <fieldset>
-                    <legend>O site te ajudou a criar interesse em luta livre?</legend>
+                <div class="grupo-avaliacao" role="group" aria-labelledby="pergunta-avaliacao-2">
+                    <p class="titulo-pergunta" id="pergunta-avaliacao-2">O site te ajudou a criar interesse em luta livre?</p>
                     <div class="experiencia-opcoes">
                         <label>
                             <input type="radio" name="interesse" value="nao">
@@ -78,7 +78,7 @@
                             <span class="experiencia-sim"><span aria-hidden="true">👍</span> Sim</span>
                         </label>
                     </div>
-                </fieldset>
+                </div>
             </div>
 
             <label for="comentario">Nos conte sobre sua experiência</label>
@@ -86,7 +86,7 @@
             <button type="submit" class="botao-avaliacao">Enviar avaliação</button>
             <p id="status-avaliacao" class="status-avaliacao" role="status"></p>
         </form>
-    </main>
+    </div>
     <script>
         // Lê o ID do usuário para enviar a avaliação.
         var idUsuario = Number(sessionStorage.ID_USUARIO);

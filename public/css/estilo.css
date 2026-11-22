@@ -697,13 +697,13 @@ html:has(.experiencia) {
     margin-bottom: clamp(12px, 3vh, 24px);
 }
 
-.experiencia fieldset {
+.experiencia .grupo-avaliacao {
     width: min(100%, 300px);
     min-width: 0;
     border: 0;
 }
 
-.experiencia legend {
+.experiencia .titulo-pergunta {
     width: 100%;
     margin-bottom: 8px;
     font-size: 18px;

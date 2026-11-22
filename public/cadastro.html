@@ -44,17 +44,15 @@
         </div>
     </div>
 
-
-
-
     <!-- Tela de cadastro -->
 
-    <main class="tela-cadastro">
+    <div class="tela-cadastro" role="main">
 
-        <section class="caixa-cadastro">
+        <div class="caixa-cadastro">
 
             <h1>Crie sua conta</h1>
 
+            <!-- Chama cadastrar() ao enviar o formulário; o retorno false evita recarregar a página. -->
             <form onsubmit="return cadastrar()">
 
                 <div class="campo-cadastro">
@@ -119,9 +117,9 @@
 
             <div id="div_erros_login"></div>
 
-        </section>
+        </div>
 
-    </main>
+    </div>
 
 
     <!-- JavaScript do cadastro -->
