@@ -7,10 +7,9 @@ function cadastrar(idUsuario, nota, interesse, comentario) {
         (?, ?, ?, ?);
     `;
 
-
-return database.executar(instrucaoSql, [
-    idUsuario, nota, interesse, comentario
-]);
+    return database.executar(instrucaoSql, [
+        idUsuario, nota, interesse, comentario
+    ]);
 }
 
 // Busca os comentários mais recentes.
@@ -22,9 +21,9 @@ function listarComentarios() {
         WHERE a.comentario IS NOT NULL
         ORDER BY a.criado_em DESC, a.id DESC
         LIMIT 20;
-    `
+    `;
 
-return database.executar(instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 // Busca os totais e a média das avaliações.

@@ -168,6 +168,8 @@
 .painel-ringue .header-left h1 {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     gap: 8px;
     color: inherit;
     font: 400 22px Anton, sans-serif;
@@ -175,19 +177,12 @@
     white-space: nowrap;
 }
 
-/* Mostra só a bandeira da logo. */
-.painel-ringue .bandeira {
-    position: relative;
-    flex: 0 0 34px;
-    height: 31px;
-    overflow: hidden;
-}
-
-.painel-ringue .bandeira img {
-    position: absolute;
-    width: 235px;
-    left: -81px;
-    top: -8px;
+/* Ajusta a logo ao menu sem cortar ou distorcer a imagem. */
+.painel-ringue .logo-dashboard {
+    display: block;
+    width: 190px;
+    max-width: 100%;
+    height: auto;
 }
 
 .painel-ringue .hello {

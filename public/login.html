@@ -45,8 +45,6 @@
         </div>
     </div>
 
-
-
     <!-- Tela de login -->
 
     <div class="tela-login" role="main">
@@ -71,7 +69,6 @@
 
                 </div>
 
-
                 <!-- Senha e botão -->
 
                 <div class="campo-senha">
@@ -92,7 +89,6 @@
 
                 </div>
 
-
                 <!-- Link para cadastro -->
 
                 <a href="cadastro.html" class="link-cadastro">
@@ -100,7 +96,6 @@
                 </a>
 
             </form>
-
 
             <!-- Mensagem de erro -->
 
@@ -114,13 +109,11 @@
 
             </div>
 
-
             <!-- Carregamento -->
 
             <div id="div_aguardar" class="loading-div">
 
                 <img src="css/loading.gif" id="loading-gif">
-
 
             </div>
 
@@ -130,11 +123,9 @@
 
     </div>
 
-
     <!-- JavaScript de autenticação -->
 
-    <script>
-
+        <script>
         // Envia e-mail e senha para conferir o login.
         function entrar() {
 
@@ -148,7 +139,7 @@
                 document.getElementById("cardErro").style.display = "block";
 
                 document.getElementById("mensagem_erro").innerHTML =
-                    "Preencha todos os campos para continuar.";
+                "Preencha todos os campos para continuar.";
 
                 finalizarAguardar();
 
@@ -199,10 +190,10 @@
                         setTimeout(function () {
                             // Escolhe a página de destino conforme o perfil.
                             if(json.perfil === "admin") {
-                            window.location = "./dashboard/dashboard.html";
+                                window.location = "./dashboard/dashboard.html";
                             } else {
-                            window.location = "./conte-para-nos.html";
-                          }
+                                window.location = "./conte-para-nos.html";
+                            }
                         }, 1000);
 
                     });
@@ -232,13 +223,11 @@
             return false;
         }
 
-
         function sumirMensagem() {
 
             document.getElementById("cardErro").style.display = "none";
 
         }
-
     </script>
 
 </body>

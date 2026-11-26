@@ -11,18 +11,16 @@ require("dotenv").config({ path: caminho_env });
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
-var avaliacoesRouter = require("./src/routes/avaliacao");
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
 
 var app = express();
 
+// Rotas utilizadas pelo Ringue Brasil.
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
-var avisosRouter = require("./src/routes/avisos");
-var medidasRouter = require("./src/routes/medidas");
-var aquariosRouter = require("./src/routes/aquarios");
-var empresasRouter = require("./src/routes/empresas");
+var avaliacoesRouter = require("./src/routes/avaliacao");
+// Rotas antigas de aquários, medidas, avisos e empresas estão em arquivos-nao-utilizados.
 
 
 // Prepara a leitura dos dados enviados pelos formulários.
@@ -39,10 +37,6 @@ app.use(cors());
 app.use("/", indexRouter);
 // Registra os endereços da API.
 app.use("/usuarios", usuarioRouter);
-app.use("/avisos", avisosRouter);
-app.use("/medidas", medidasRouter);
-app.use("/aquarios", aquariosRouter);
-app.use("/empresas", empresasRouter);
 app.use("/avaliacoes", avaliacoesRouter);
 
 // Inicia o servidor do site.

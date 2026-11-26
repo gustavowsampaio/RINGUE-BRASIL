@@ -121,70 +121,68 @@
 
     </div>
 
-
     <!-- JavaScript do cadastro -->
 
-    <script>
-
+        <script>
         // Cadastra os dados recebidos.
         function cadastrar() {
-    var nomeVar = nome_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+            var nomeVar = nome_input.value;
+            var emailVar = email_input.value;
+            var senhaVar = senha_input.value;
+            var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-    if (
-        nomeVar == "" ||
-        emailVar == "" ||
-        senhaVar == "" ||
-        confirmacaoSenhaVar == ""
-    ) {
-        mensagem_erro.innerHTML = "Preencha todos os campos.";
-        cardErro.style.display = "block";
-        return false;
-    }
+            if (
+                nomeVar == "" ||
+                emailVar == "" ||
+                senhaVar == "" ||
+                confirmacaoSenhaVar == ""
+            ) {
+                mensagem_erro.innerHTML = "Preencha todos os campos.";
+                cardErro.style.display = "block";
+                return false;
+            }
 
-    if (senhaVar != confirmacaoSenhaVar) {
-        mensagem_erro.innerHTML = "As senhas não são iguais.";
-        cardErro.style.display = "block";
-        return false;
-    }
+            if (senhaVar != confirmacaoSenhaVar) {
+                mensagem_erro.innerHTML = "As senhas não são iguais.";
+                cardErro.style.display = "block";
+                return false;
+            }
 
-    // Envia o cadastro para o servidor.
-    fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            nomeServer: nomeVar,
-            emailServer: emailVar,
-            senhaServer: senhaVar
-        })
-    })
-    .then(function (resposta) {
-        if (resposta.ok) {
-            mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
-            cardErro.style.display = "block";
+            // Envia o cadastro para o servidor.
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
+                    cardErro.style.display = "block";
 
-            setTimeout(function () {
-                window.location = "login.html";
-            }, 2000);
-        } else {
-            resposta.text().then(function (texto) {
-                mensagem_erro.innerHTML = texto;
+                    setTimeout(function () {
+                        window.location = "login.html";
+                    }, 2000);
+                } else {
+                    resposta.text().then(function (texto) {
+                        mensagem_erro.innerHTML = texto;
+                        cardErro.style.display = "block";
+                    });
+                }
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                mensagem_erro.innerHTML = "Erro ao realizar cadastro.";
                 cardErro.style.display = "block";
             });
-        }
-    })
-    .catch(function (erro) {
-        console.log(erro);
-        mensagem_erro.innerHTML = "Erro ao realizar cadastro.";
-        cardErro.style.display = "block";
-    });
 
-    return false;
-}
+            return false;
+        }
     </script>
 
 </body>

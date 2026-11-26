@@ -31,8 +31,6 @@
         </div>
     </div>
 
-
-
     <div class="experiencia" role="main">
         <p class="experiencia-etiqueta">Sua experiência</p>
         <h1>Conte para nós</h1>
@@ -87,7 +85,7 @@
             <p id="status-avaliacao" class="status-avaliacao" role="status"></p>
         </form>
     </div>
-    <script>
+        <script>
         // Lê o ID do usuário para enviar a avaliação.
         var idUsuario = Number(sessionStorage.ID_USUARIO);
         if (!Number.isInteger(idUsuario) || idUsuario < 1) {
@@ -98,45 +96,45 @@
 
         // Lê o formulário e envia a avaliação para a API.
         formulario.addEventListener("submit", async function (evento) {
-    evento.preventDefault();
+            evento.preventDefault();
 
-    var status = document.getElementById("status-avaliacao");
-    var dados = new FormData(formulario);
-    var nota = dados.get("nota");
-    var interesse = dados.get("interesse");
+            var status = document.getElementById("status-avaliacao");
+            var dados = new FormData(formulario);
+            var nota = dados.get("nota");
+            var interesse = dados.get("interesse");
 
-    if (!nota || !interesse) {
-        status.textContent = "Escolha uma nota e responda Sim ou Não.";
-        return;
-    }
+            if (!nota || !interesse) {
+                status.textContent = "Escolha uma nota e responda Sim ou Não.";
+                return;
+            }
 
-    var botao = formulario.querySelector("button[type='submit']");
-    botao.disabled = true;
-    status.textContent = "Enviando avaliação...";
+            var botao = formulario.querySelector("button[type='submit']");
+            botao.disabled = true;
+            status.textContent = "Enviando avaliação...";
 
-    try {
-        var resposta = await fetch("/avaliacoes/cadastrar", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                idUsuario: idUsuario,
-                nota: Number(nota),
-                interesse: interesse,
-                comentario: dados.get("comentario")
-            })
+            try {
+                var resposta = await fetch("/avaliacoes/cadastrar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        idUsuario: idUsuario,
+                        nota: Number(nota),
+                        interesse: interesse,
+                        comentario: dados.get("comentario")
+                    })
+                });
+
+                status.textContent = await resposta.text();
+
+                if (resposta.ok) {
+                    formulario.reset();
+                }
+            } catch (erro) {
+                status.textContent = "Não foi possível conectar ao servidor.";
+            } finally {
+                botao.disabled = false;
+            }
         });
-
-        status.textContent = await resposta.text();
-
-        if (resposta.ok) {
-            formulario.reset();
-        }
-    } catch (erro) {
-        status.textContent = "Não foi possível conectar ao servidor.";
-    } finally {
-        botao.disabled = false;
-    }
-});
     </script>
 </body>
 
